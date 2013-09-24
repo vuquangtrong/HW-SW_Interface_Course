@@ -1,0 +1,132 @@
+-----------------------------------------
+Download VM here:
+https://spark-public.s3.amazonaws.com/hardware/VM.7z
+-----------------------------------------
+
+Virtual Machine Installation Instructions
+
+Overview
+
+We have prepared for you a Fedora Linux virtual machine (VM) which we recommend you download and use for this course. The projects you will be doing as part of this course rely on a specific machine architecture that your home machine may not match. By using a standard VM you can ensure that your assignments work under the same conditions they will be graded. Additionally, because they are separate machines from the host system on which they run, they are reasonably isolated from it – instabilities in your VM won’t clobber your native machine, and (most likely) vice versa. In face, a big benefit to you of the VM is that it makes it much more likely that you can get help from instructors, TAs, and classmates if something goes wrong, because your VM’s configuration is the same as everyone else’s.
+
+This virtual machine can be run using software from VMware. If your machine runs Windows or Linux, you can use VMware Player, which is free to everyone (in the world). If you have a Mac, you can run VMware Fusion. As another option, you may opt to use VirtualBox which is available free-of-charge on Linux, Mac, and Windows, but this option will not be officially supported. All further instructions will assume usage of VMware Player/Fusion.
+
+You should keep in mind that virtual machines are real machines, meaning that they’re subject to the same sorts of security vulnerabilities as any other machine. You should apply patches/updates as they are made available.
+Support Availability
+
+We expect to be able to (try to) help with problems installing the virtual machines and their initial setup. Because we also expect that nearly all installed VMs will have nearly identically configurations, we expect that instructional staff and your fellow students will have a fighting chance of diagnosing problems using the applications we require for this course. However, we do not guarantee systems administration help. The web and the class discussion board will be a good place to discuss any questions you may have. Please be sure to check the discussion boards before you post. Chances are, someone has already asked your question, and someone has answered it! There is a special section devoted to the VM here: VM and Development Environment. Be sure to include specific information including: what operating system and version you are using, exact error message(s), how you discovered this problem, what you have tried already.
+Installation
+
+Note 1: These instructions primarily assume a 64-bit version of Windows with an Intel processor. There may be slight differences in the tools needed and necessary steps if you are running Mac or some flavor of Linux.
+
+Note 2: You MUST go through the setup procedure before using a just-downloaded virtual machine.
+What You Will Need
+
+    A 64-bit processor and at least 2GB of RAM. If you're not sure, download and run the VMware Processor Check for 64-Bit Compatibility tool from the VMware website to check if your workstation is compatible.
+
+Note: If you are running Windows (or even Linux over a Windows machine) and have an Intel processor, you may need to enable the VT-x virtualization technology. This is done in BIOS. You will need to restart your computer, enter BIOS, and search for the setting which enables VT-x. Each system and machine is different. If you are having trouble accessing BIOS or enabling VT-x, a web search including information about your operating system and processor will help. When you are finished, power your computer completely off and back on (simply choosing to restart your computer will often not allow these changes to take place). Then run the VMware compatibility check.
+
+    VMware Player (Windows/Linux) or VMware Fusion (Mac), or you can try VirtualBox.
+    7-Zip if you choose to download the VM directly, or a BitTorrent client such as µTorrent or Transmission if you prefer this route.
+        If you download the VM directly, you may wish to check its integrity: md5sum -c md5sum.txt
+
+Linux VM Install & Setup
+
+    Install VMware
+
+    Install the appropriate VMware product on your host system, as explained in the Overview and Using VMware sections.
+
+    Obtain the Linux VM
+
+    Fetch the Linux virtual machine image, which is just an archived set a files. It is, however, a very large set of files (1.3GB). You will need to install 7-Zip in order to extract the files to your computer. Copy the files to your machine, to a place you can remember for the next few minutes.
+
+    Since the VM archive is so large, you may opt to use a BitTorrent client such as µTorrent or Transmission instead of a direct download. We provide a torrent for this purpose.
+
+    Initial Setup: Part A
+
+    Part A of the initial setup lasts until the termination of the setup-vm script that we have provided for you. Here you will learn how to update the course materials (we will let you know when you will need to update the materials again), and you will set up your own root and auser password. Network connectivity is required for this step.
+
+    a. Launch the VMware product - Player or Fusion. Select Open a Virtual Machine, then navigate to the place you saved the VM image file (it’s a .vmx file) and open it. A tab for the virtual machine will be created and become current. Select Play Virtual Machine to boot the machine. Select “I copied it”, if prompted. Wait for the VM to load and a login screen to appear.
+
+    b. Login as user A. Happy User, by clicking that name. No password is required.
+
+    c. Once logged in, click on the icon with an exclamation mark in the top toolbar, the one fourth from the right (tool tip: “Update Course Materials”). This will launch a terminal window and download the latest version of the course materials (a network connection is necessary). Hit ENTER when prompted.
+
+    d. Open a terminal window by clicking on the icon directly to the right of the exclamation mark icon (tool tip: “Terminal Emulator”). If you are not already, you should become familiar with a terminal window during this course. To begin the setup, type setup-vm (without quotes) and press ENTER.
+
+    e. You will be asked to provide a password for the root account. YOU MUST REMEMBER THIS root PASSWORD FOR MAINTENANCE PURPOSES. Furthermore, ignore any "Bad password" messages you may get (so you can use silly things like password1 or WHATEVERS2009).
+
+    f. You will also provide a password for your auser account. We are not supporting adding other users to the VM. The default account is packaged will files necessary to access the course materials.
+
+    g. After answering the prompts, the terminal should say “Setup is complete!” and drop you back to the command-prompt.
+
+    Initial Setup: Part B
+
+    This portion of setup also requires network connectivity. It should be performed as soon after Part A as possible. It also shows you how to perform an activity you’ll do routinely: installing software updates.
+
+    a. Login to your auser account with the password you just supplied in Step 4.
+
+    b. (Software Updates) In the Applications menu at the top of your desktop, go to Administration -&gt; Software Update. Click on the Install button to install any software updates that have come out between the time we created the virtual machine and your install of it. (Depending on what those updates are, you may be asked to reboot when the update is done. If so, reboot, login, and proceed with the next step.) You should install updates regularly. The system will alert you to the availability of important updates using an icon in the top tool bar.
+
+    **WARNING:** By default, a software update will install a new
+    operating system kernel if one is available. Unfortunately, the
+    VMware tools are sensitive to the kernel version. Installing a
+    new kernel will require you to re-install VMware tools. This can
+    be a tedious procedure. You can protect yourself from that
+    process by installing a new kernel only if you really want one.
+    To do this open up a terminal and type the following:
+
+    su -
+    [your root password, at the prompt]
+    [your favorite text editor] /etc/yum.conf
+
+    and add the line 
+
+    exclude=kernel kernel-devel kernel-headers
+
+    before
+    you run software update. If you think you need a new kernel at
+    some point, simply comment out the above line and run software
+    update.
+
+    Save and exit your text editor, and type exit to return to auser.
+
+    c. (Update VMware Tools) While logged into the VM as auser, in the menu bar of the VMware Player select Player -&gt; Manage -&gt; Update VMware Tools.... (If you do not see an option to update VMware tools, you have the current version and can skip this step.) A CD-icon labeled "VMware Tools" should appear on your desktop. Right click and select "Mount Volume". Next, open a terminal window by single clicking the monitor icon in the toolbar at the top of the VM (the icon's tool-tip is "Terminal Emulator"). Enter the following commands:
+
+    su -
+    [your root password, at the prompt]
+    tar xzf /run/media/auser/VMware\ Tools/VM*tar.gz
+    ./vmware-tools-distrib/vmware-install.pl -default
+    exit
+
+    It will take a few moments for the tar file to unpack. Also, while VMware updates, do not enter any commands into the terminal. The -default flag will take care of everything for you. When it's done, your version of VMware tools will be up to date. You can restart the VM and log back in.
+
+VM Shutdown
+
+When you are done using the VM, you have two choices. One is to use VMware Player to suspend the VM. This is a bit like hibernating; when you next start the VM you’ll come back to the desktop as you left it when you suspended. You suspend using the VM menu on the VMware window (i.e., not anything in the Linux virtual machine), then Power, then Suspend.
+
+The other option is to shut down the Linux machine, which you do using the System menu on the virtual machine desktop.
+
+You should not try to simply kill VMware Player to terminate. It doesn’t like that (because it’s the analog of yanking the power cord out of the wall to turn off your desktop, as far as the Linux virtual machine is concerned).
+Other
+Policies
+
+Broken virtual machine systems are replaced, not repaired. While you are free (and even encouraged) to install whatever software you want, if some mistake or incompatibilities causes the system to stop functioning properly, the solution is to get a fresh copy of the VM distribution, install it, and start using it. The VMs are configured so that, by default, user files are placed on a separate (virtual) disk from system files. Unless you have gone out of the way to cause yourself trouble, that means you shouldn’t lose any user files even if you have to replace the virtual machine – you simply move the user files disk from the old machine to the new one.
+Customization versus Support
+
+We expect that in the overwhelmingly common case, users will use standard mechanisms to install new software and update the system (e.g., yum or its GUI interface on Linux) and that this will not break systems. We also expect that the more exotic the things you are doing, the more sophisticated a user you are, and the better prepared you are to diagnose problems you cause yourself. (That means that if you do something way out of the ordinary, we probably can’t help, other than to giving you to a fresh copy of the VM to install.) Everything you should need for this course is preinstalled on the virtual machine.
+VM Information
+64- versus 32-bits
+
+The virtual machine we provide runs a 64-bit operating system. The material for the course is tailored for 64-bit machines. Unfortunately, this means that if you have a 32-bit operating system, you will not be able to run this VM. You can run a 64-bit VM if you have a 64-bit processor but have installed a 32-bit host OS and your processor supports the right extensions. Download and run the VMware Processor Check for 64-Bit Compatibility tool from the VMware website to check if your workstation is compatible.
+Disks
+
+The Linux VM has two disk drives, one for system files and one for user files. You can change the size of the virtual disks, if you find you need more space. There are two disks so that it’s easy to move your personal files to a new machine (for example, if you corrupt the VM and have to fetch a new one): you simply move the /dev/sdb1 disk to the new machine, as a whole.
+Networking
+
+Network connectivity is via NAT. The NAT runs on the host machine (it’s automatically provided by the VMware software). This means that the VM can connect to the host over the virtual LAN and the host can also connect to the VM over the virtual LAN; the VM can connect to the internet (via the NAT and the host’s physical NIC); no other machines (on your local network or the internet at large) can initiate a connection to the VM.
+
+You can change the way the VM is networked by right-clicking on the Network Adapter icon (on the lower right margin of the VMware window). Bridged means the VMware machine acts like another physical machine on your network (which should have a DHCP server on it), and so can be seen by other machines on your network. Host Only means the VM cannot communicate past the host machine.
+Etc.
+
+You can also change most other parameters of the VM (e.g., display resolution, amount of RAM, ...). Note that the default setting for RAM is 1GB. It is recommended that the maximum amount of RAM for the VM not exceed half the capacity of the RAM of the host OS.
